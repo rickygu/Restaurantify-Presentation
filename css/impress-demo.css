@@ -60,16 +60,23 @@ table {
 
 
 body {
-    font-family: 'PT Sans', sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     
     min-height: 740px;
-
-    background: rgb(215, 215, 215);
-    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(240, 240, 240)), to(rgb(190, 190, 190)));
-    background: -webkit-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
-    background:    -moz-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
-    background:      -o-radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
-    background:         radial-gradient(rgb(240, 240, 240), rgb(190, 190, 190));
+	background-color: #b4e7ff;
+	color: #FFF;
+	background-image:  url('wallpaper.png') ;
+	background-attachment: fixed;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-repeat:no-repeat;
+	
+/*    background: rgb(224,240,245);
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(224,240,245)), to(rgb(182,233,248)));
+    background: -webkit-radial-gradient( rgb(224,240,245),rgb(182,233,248));
+    background:    -moz-radial-gradient( rgb(224,240,245),rgb(182,233,248));
+    background:      -o-radial-gradient( rgb(224,240,245),rgb(182,233,248));
+    background:         radial-gradient( rgb(224,240,245),rgb(182,233,248));*/
 
     -webkit-font-smoothing: antialiased;
 }
@@ -113,7 +120,7 @@ body     { pointer-events: none; }
     -o-box-sizing:      border-box;
     box-sizing:         border-box;
 
-    font-family: 'PT Serif', georgia, serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
     font-size: 48px;
     line-height: 1.5;
@@ -167,7 +174,7 @@ body     { pointer-events: none; }
     transition:         opacity 1s,         transform 0.5s 1s;
 }
 
-.impress-on-bored .hint {
+.step-bored + .hint {
     opacity: 1;
     
     -webkit-transition: opacity 1s 5s, -webkit-transform 0.5s;
@@ -203,7 +210,7 @@ body     { pointer-events: none; }
 }
 
 #title h1 {
-    font-size: 190px;
+    font-size: 150px;
     
     -webkit-transform: translateZ(50px);
     -moz-transform:    translateZ(50px);
@@ -218,27 +225,27 @@ body     { pointer-events: none; }
 
 /* big thoughts */
 
-#big {
+.big {
     width: 600px;
     text-align: center;
     font-size: 60px;
     line-height: 1;
 }
 
-#big b {
+.big b {
     display: block;
-    font-size: 250px;
-    line-height: 250px;
+    font-size: 200px;
+    line-height: 200px;
 }
 
-#big .thoughts {
+.big .thoughts {
     font-size: 90px;
     line-height: 150px;
 }
 
 /* tiny ideas */
 
-#tiny {
+.tiny {
     width: 500px;
     text-align: center;
 }
@@ -425,7 +432,7 @@ body     { pointer-events: none; }
 
 /* on overview step everything is visible */
 
-.impress-on-overview .step {
+#impress.step-overview .step {
     opacity: 1;
     cursor: pointer;
 }
@@ -448,14 +455,14 @@ body     { pointer-events: none; }
 
     border-radius: 10px;
 
-    background-color: white;
+   	background-color: rgba( 0, 0, 0, 0.3);
 
     box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
     border: 1px solid rgba(0, 0, 0, .3);
 
-    font-family: 'Open Sans', Arial, sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-    color: rgb(102, 102, 102);
+    color: #EEE;
     text-shadow: 0 2px 2px rgba(0, 0, 0, .1);
 
     font-size: 30px;
@@ -480,7 +487,7 @@ body     { pointer-events: none; }
 /* IMPRESS NOT SUPPORTED STYLES */
 
 .fallback-message {
-    font-family: sans-serif;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     line-height: 1.3;
     
     display: none;
@@ -507,3 +514,39 @@ body     { pointer-events: none; }
     display: block;
 }
 
+#connect img{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#Jill p{
+    font-size: 40px;
+}
+
+.team h1{
+    font-size: 90px;
+    font-weight: bold;
+}
+
+.float_container_wrap img, .float_container_wrap p{
+    float: left;
+}
+
+#start h1{
+   font-size: 100px;
+   padding-bottom: 100px;
+   padding-top: 200px;
+}
+
+#start p{
+    font-size: 30px;
+}
+.logo{
+	font-weight: bold;
+}
+.logo .me{
+	color: #00c5ff;
+}
+#end p{
+	font-size: 30px;
+}

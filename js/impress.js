@@ -11,13 +11,10 @@
  *
  * ------------------------------------------------
  *  author:  Bartek Szopka
- *  version: 0.4
+ *  version: 0.4pre (in development)
  *  url:     http://bartaz.github.com/impress.js/
  *  source:  http://github.com/bartaz/impress.js/
  */
-
-/*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, latedef:true, newcap:true,
-         noarg:true, noempty:true, undef:true, strict:true, browser:true */
 
 (function ( document, window ) {
     'use strict';
@@ -47,7 +44,7 @@
             }
 
             return memory[ prop ];
-        };
+        }
 
     })();
 
@@ -60,13 +57,13 @@
         for ( key in props ) {
             if ( props.hasOwnProperty(key) ) {
                 pkey = pfx(key);
-                if ( pkey !== null ) {
+                if ( pkey != null ) {
                     el.style[pkey] = props[key];
                 }
             }
         }
         return el;
-    };
+    }
     
     var toNumber = function (numeric, fallback) {
         return isNaN(numeric) ? (fallback || 0) : Number(numeric);
@@ -74,7 +71,7 @@
     
     var byId = function ( id ) {
         return document.getElementById(id);
-    };
+    }
     
     var $ = function ( selector, context ) {
         context = context || document;
@@ -113,22 +110,12 @@
     };
     
     // CHECK SUPPORT
-    var body = document.body;
     
     var ua = navigator.userAgent.toLowerCase();
-    var impressSupported = ( pfx("perspective") !== null ) &&
-                           ( body.classList ) &&
-                           ( body.dataset ) &&
-                           ( ua.search(/(iphone)|(ipod)|(android)/) === -1 );
-    
-    if (!impressSupported) {
-        // we can't be sure that `classList` is supported
-        body.className += " impress-not-supported ";
-        return;
-    } else {
-        body.classList.remove("impress-not-supported");
-        body.classList.add("impress-supported");
-    }
+    var impressSupported = ( pfx("perspective") != null ) &&
+                           ( document.body.classList ) &&
+                           ( document.body.dataset ) &&
+                           ( ua.search(/(iphone)|(ipod)|(android)/) == -1 );
     
     var roots = {};
     
@@ -140,7 +127,7 @@
         
         perspective: 1000,
         
-        transitionDuration: 1000
+        transitionDuration: 1000,
     };
     
     var impress = window.impress = function ( rootId ) {
@@ -156,12 +143,19 @@
         
         var root = byId( rootId );
         
+        if (!impressSupported) {
+            root.className = "impress-not-supported";
+            return;
+        } else {
+            root.className = "";
+        }
+        
         // viewport updates for iPad
         var meta = $("meta[name='viewport']") || document.createElement("meta");
         // hardcoding these values looks pretty bad, as they kind of depend on the content
         // so they should be at least configurable
         meta.content = "width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no";
-        if (meta.parentNode !== document.head) {
+        if (meta.parentNode != document.head) {
             meta.name = 'viewport';
             document.head.appendChild(meta);
         }
@@ -176,8 +170,8 @@
             
             perspective: toNumber(rootData.perspective, defaults.perspective),
             
-            transitionDuration: toNumber(rootData.transitionDuration, defaults.transitionDuration)
-        };
+            transitionDuration: toNumber(rootData.transitionDuration, defaults.transitionDuration),
+        }
         
         var canvas = document.createElement("div");
         canvas.className = "canvas";
@@ -194,7 +188,7 @@
         
         document.documentElement.style.height = "100%";
         
-        css(body, {
+        css(document.body, {
             height: "100%",
             overflow: "hidden"
         });
@@ -204,7 +198,7 @@
             transformOrigin: "top left",
             transition: "all 0s ease-in-out",
             transformStyle: "preserve-3d"
-        };
+        }
         
         css(root, props);
         css(root, {
@@ -283,8 +277,8 @@
         
         var windowScale = computeWindowScale();
         
-        var stepTo = function ( el, force ) {
-            if ( !isStep(el) || (el === active && !force) ) {
+        var goto = function ( el, force ) {
+            if ( !isStep(el) || (el == active && !force) ) {
                 // selected element is not defined as step or is already active
                 return false;
             }
@@ -303,11 +297,10 @@
             
             if ( active ) {
                 active.classList.remove("active");
-                body.classList.remove("impress-on-" + active.id);
             }
             el.classList.add("active");
             
-            body.classList.add("impress-on-" + el.id);
+            root.className = "step-" + el.id;
             
             // Setting fragment URL with `history.pushState`
             // and it has to be set after animation finishes, because in Chrome it
@@ -322,7 +315,7 @@
                 rotate: {
                     x: -step.rotate.x,
                     y: -step.rotate.y,
-                    z: -step.rotate.z
+                    z: -step.rotate.z,
                 },
                 translate: {
                     x: -step.translate.x,
@@ -344,12 +337,11 @@
                 windowScale = computeWindowScale();
             }
             
-            var targetScale = target.scale * windowScale;
-            
             css(root, {
                 // to keep the perspective look similar for different scales
                 // we need to 'scale' the perspective, too
-                transform: perspective( config.perspective / targetScale ) + scale( targetScale ),
+                transform: perspective( config.perspective / (target.scale * windowScale) )
+                         + scale(target.scale * windowScale),
                 transitionDuration: duration,
                 transitionDelay: (zoomin ? delay : "0ms")
             });
@@ -370,18 +362,18 @@
             var prev = steps.indexOf( active ) - 1;
             prev = prev >= 0 ? steps[ prev ] : steps[ steps.length-1 ];
             
-            return stepTo(prev);
+            return goto(prev);
         };
         
         var next = function () {
             var next = steps.indexOf( active ) + 1;
             next = next < steps.length ? steps[ next ] : steps[ 0 ];
             
-            return stepTo(next);
+            return goto(next);
         };
         
         window.addEventListener("hashchange", function () {
-            stepTo( getElementFromUrl() );
+            goto( getElementFromUrl() );
         }, false);
         
         window.addEventListener("orientationchange", function () {
@@ -390,23 +382,21 @@
         
         // START 
         // by selecting step defined in url or first step of the presentation
-        stepTo(getElementFromUrl() || steps[0]);
+        goto(getElementFromUrl() || steps[0]);
 
         return (roots[ "impress-root-" + rootId ] = {
-            stepTo: stepTo,
+            goto: goto,
             next: next,
             prev: prev
         });
 
-    };
+    }
 })(document, window);
 
 // EVENTS
 
 (function ( document, window ) {
     'use strict';
-    
-    var impress = window.impress;
     
     // throttling function calls, by Remy Sharp
     // http://remysharp.com/2010/07/21/throttling-function-calls/
@@ -425,25 +415,25 @@
     
     // prevent default keydown action when one of supported key is pressed
     document.addEventListener("keydown", function ( event ) {
-        if ( event.keyCode === 9 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
+        if ( event.keyCode == 9 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
             event.preventDefault();
         }
     }, false);
     
     // trigger impress action on keyup
     document.addEventListener("keyup", function ( event ) {
-        if ( event.keyCode === 9 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
+        if ( event.keyCode == 9 || ( event.keyCode >= 32 && event.keyCode <= 34 ) || (event.keyCode >= 37 && event.keyCode <= 40) ) {
             switch( event.keyCode ) {
-                case 33: // pg up
-                case 37: // left
-                case 38: // up
+                case 33: ; // pg up
+                case 37: ; // left
+                case 38:   // up
                          impress().prev();
                          break;
-                case 9:  // tab
-                case 32: // space
-                case 34: // pg down
-                case 39: // right
-                case 40: // down
+                case 9:  ; // tab
+                case 32: ; // space
+                case 34: ; // pg down
+                case 39: ; // right
+                case 40:   // down
                          impress().next();
                          break;
             }
@@ -457,21 +447,21 @@
         // event delegation with "bubbling"
         // check if event target (or any of its parents is a link)
         var target = event.target;
-        while ( (target.tagName !== "A") &&
-                (target !== document.documentElement) ) {
+        while ( (target.tagName != "A") &&
+                (target != document.documentElement) ) {
             target = target.parentNode;
         }
         
-        if ( target.tagName === "A" ) {
+        if ( target.tagName == "A" ) {
             var href = target.getAttribute("href");
             
             // if it's a link to presentation step, target this step
-            if ( href && href[0] === '#' ) {
+            if ( href && href[0] == '#' ) {
                 target = document.getElementById( href.slice(1) );
             }
         }
         
-        if ( impress().stepTo(target) ) {
+        if ( impress().goto(target) ) {
             event.stopImmediatePropagation();
             event.preventDefault();
         }
@@ -482,11 +472,11 @@
         var target = event.target;
         // find closest step element
         while ( !target.classList.contains("step") &&
-                (target !== document.documentElement) ) {
+                (target != document.documentElement) ) {
             target = target.parentNode;
         }
         
-        if ( impress().stepTo(target) ) {
+        if ( impress().goto(target) ) {
             event.preventDefault();
         }
     }, false);
@@ -511,9 +501,9 @@
     }, false);
     
     // rescale presentation when window is resized
-    window.addEventListener("resize", throttle(function () {
+    window.addEventListener("resize", throttle(function (event) {
         // force going to active step again, to trigger rescaling
-        impress().stepTo( document.querySelector(".active"), true );
+        impress().goto( document.querySelector(".active"), true );
     }, 250), false);
 })(document, window);
 

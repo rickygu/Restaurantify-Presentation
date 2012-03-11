@@ -68,7 +68,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=1024" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>impress.js | presentation tool based on the power of CSS3 transforms and transitions in modern browsers | by Bartek Szopka @bartaz</title>
+    <title>Restaurantify.me | What is Restaurantify?</title>
     
     <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
     <meta name="author" content="Bartek Szopka" />
@@ -92,47 +92,31 @@
     -->
     <link href="css/impress-demo.css" rel="stylesheet" />
     
-    <link rel="shortcut icon" href="favicon.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 </head>
+<body>
 
 <!--
-    
-    Body element is used by impress.js to set some useful class names, that will allow you to detect
-    the support and state of the presentation in CSS or other scripts.
-    
-    First very useful class name is `impress-not-supported`. This class means, that browser doesn't
-    support features required by impress.js, so you should apply some fallback styles in your CSS.
-    It's not necessary to add it manually on this element. If the script detects that browser is not
-    good enough it will add this class, but keeping it in HTML means that users without JavaScript
-    will also get fallback styles.
-    
-    When impress.js script detects that browser supports all required features, this class name will
-    be removed.
-    
-    The class name on body element also depends on currently active presentation step. More details about
-    it can be found later, when `hint` element is being described.
-    
--->
-<body class="impress-not-supported">
-
-<!--
-    For example this fallback message is only visible when there is `impress-not-supported` class on body.
--->
-<div class="fallback-message">
-    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
-    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
-</div>
-
-<!--
-    
-    Now that's the core element used by impress.js.
     
     That's the wrapper for your presentation steps. In this element all the impress.js magic happens.
     It doesn't have to be a `<div>`. Only `id` is important here as that's how the script find it.
     
+    It's worth to notice the `impress-not-supported` class. This class means, that browser doesn't
+    support features required by impress.js, so you can apply some fallback styles in your CSS.
+    It's not necessary to add it manually on this element. If the script detects that browser is not
+    good enough it will add this class, but keeping it in HTML means that users without JavaScript
+    will also get fallback styles.
+    
+    The class name on this element also depends on currently active presentation step. More details about
+    it can be found below, when `hint` element is being described.
+    
 -->
-<div id="impress">
+<div id="impress" class="impress-not-supported">
+
+    <div class="fallback-message">
+        <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+        <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser. Upcoming version 10 of Internet Explorer <i>should</i> also handle it.</p>
+    </div>
 
     <!--
         
@@ -151,8 +135,22 @@
         It will not be rotated or scaled.
         
     -->
-    <div id="bored" class="step slide" data-x="-1000" data-y="-1500">
+<!--    <div id="bored" class="step slide" data-x="-1000" data-y="-1500">
         <q>Aren't you just <b>bored</b> with all those slides-based presentations?</q>
+    </div>-->
+
+    <div id="start" class="big step slide" data-x="-1000" data-y="-5000" data-rotate-y="130">
+        <h1><span class="logo">Restaurantify<span class="me">.me</span></span></h1>
+        <p> 
+            Mujtaba Badat, Ricky Gu, Pouyan Taghipour
+        </p> 
+				<br><br>
+				<p> This presentation is made with <br> Impress.JS, HTML5, and CSS3  </p>
+    </div>
+
+    <div id="Jill" class="step slide" data-x="-1000" data-y="-1500">
+        <center><img src="img/Jill.jpg" alt="Jill" /></center>
+        <p>This is Jill, a hard-working professional in her mid 20's.</p>
     </div>
 
     <!--
@@ -170,14 +168,28 @@
         Using classic `id`-based links like `#step-2` makes these links usable also in fallback mode.
         
     -->
-    <div class="step slide" data-x="0" data-y="-1500">
-        <q>Don't you think that presentations given <strong>in modern browsers</strong> shouldn't <strong>copy the limits</strong> of 'classic' slide decks?</q>
+    <div id="Organic-Food" class="step slide" data-x="-2000" data-y="-1500">
+        <q>Jill absolutely <strong>loves</strong> organic foods.</q>
+				<center><img src="img/organic_meal.jpg" alt="Organic Meal" /></center>
     </div>
 
-    <div class="step slide" data-x="1000" data-y="-1500">
-        <q>Would you like to <strong>impress your audience</strong> with <strong>stunning visualization</strong> of your talk?</q>
+    <div id="Jill-Dilemma" class="step slide" data-x="-3000" data-y="-1500">
+        <q>Unfortunately, between her job, friends, and everything else going on in her life, Jill has no time to cook <strong>homemade food</strong> with the <strong>organic ingredients</strong> she loves.</q>
+    </div>
+    
+    <div id="Pauline" class="step slide" data-x="1000" data-y="-1500">
+        <center><img src="img/Pauline.jpg" alt="Pauline" /></center>
+        <q>Meet Pauline, an amazing mother and cook that specializes in delicious organic meals.</q>
     </div>
 
+    <div id="Pauline-2" class="step slide" data-x="2000" data-y="-1500">
+        <q>Pauline is a pro in the kitchen. However, she decided not to pursue a professional career to stay home with her son.</q>
+    </div>
+    
+    <div id="Pauline-3"class="step slide" data-x="3000" data-y="-1500">
+        <q>The recession has put pressure on Pauline to get a job. She would really love to be able to make money without leaving home.</q>
+    </div>
+    
     <!--
         
         This is an example of step element being scaled.
@@ -188,12 +200,20 @@
         down (4 times) to make it back to it's correct size.
         
     -->
-    <div id="title" class="step" data-x="0" data-y="0" data-scale="4">
-        <span class="try">then you should try</span>
-        <h1>impress.js<sup>*</sup></h1>
-        <span class="footnote"><sup>*</sup> no rhyme intended</span>
+    <div id="help" class="step big" data-x="0" data-y="-2000" data-scale="1">
+        <div id="connect">
+            <center>
+                <img src="img/Jill.jpg" alt="Jill" />
+                <p>How can we help Jill and Pauline?</p>
+                <img src="img/Pauline.jpg" alt="Pauline" />
+            </center>
+        </div>
     </div>
 
+    <div id="title" class="step" data-x="0" data-y="1000" data-rotate-x="-90" data-scale="5">
+        <h1>Restaurantify!</h1>
+    </div>
+    
     <!--
         
         This element introduces rotation.
@@ -202,14 +222,9 @@
         element should be rotated by 90 degrees clockwise.
         
     -->
-    <div id="its" class="step" data-x="850" data-y="3000" data-rotate="90" data-scale="5">
-        <p>It's a <strong>presentation tool</strong> <br/>
-        inspired by the idea behind <a href="http://prezi.com">prezi.com</a> <br/>
-        and based on the <strong>power of CSS3 transforms and transitions</strong> in modern browsers.</p>
-    </div>
-
-    <div id="big" class="step" data-x="3500" data-y="2100" data-rotate="180" data-scale="6">
-        <p>visualize your <b>big</b> <span class="thoughts">thoughts</span></p>
+    <div id="its" class="step" data-x="850" data-y="3500" data-rotate="90" data-scale="5">
+        <p><span class="logo">Restaurantify<span class="me">.me</span></span> allows Jill to get the <strong>home made food</strong> she wants. At the same time, Pauline can make extra money from her <strong>online home-based restaurant</strong>.
+        </p>
     </div>
 
     <!--
@@ -221,25 +236,36 @@
         positioned far away from us (by 3000px).
         
     -->
-    <div id="tiny" class="step" data-x="2825" data-y="2325" data-z="-3000" data-rotate="300" data-scale="1">
-        <p>and <b>tiny</b> ideas</p>
+    <div id="win-win" class="step tiny" data-x="2825" data-y="2325" data-z="-3000" data-rotate="300" data-scale="1">
+        <p>That's a <b>win-win</b>!</p>
     </div>
 
-    <div id="ing" class="step" data-x="3500" data-y="-850" data-rotate="270" data-scale="6">
-        <p>by <b class="positioning">positioning</b>, <b class="rotating">rotating</b> and <b class="scaling">scaling</b> them on an infinite canvas</p>
+    <div id="solution" class="step" data-x="2825" data-y="2325">
+        <p>Jill can fit the food she loves into her busy schedule.</p>
+        <br/>
+        <p>Pauline can run her business while taking care of her home.</p>
+    </div>
+    
+    <div id="ing" class="step" data-x="3500" data-y="-2850" data-rotate-y="170" data-scale="4">
+        <p>How does <span class="logo">Restaurantify<span class="me">.me</span></span> make money?</p>
     </div>
 
-    <div id="imagination" class="step" data-x="6700" data-y="-300" data-scale="6">
-        <p>the only <b>limit</b> is your <b class="imagination">imagination</b></p>
+    <div id="business model" class="step" data-x="7000" data-y="-300" data-scale="6">
+        <p>We use a business model that has been proven to work by companies such as <strong>Airbnb</strong> and <strong>Shopify</strong></p>
     </div>
 
-    <div id="source" class="step" data-x="6300" data-y="2000" data-rotate="20" data-scale="4">
-        <p>want to know more?</p>
-        <q><a href="http://github.com/bartaz/impress.js">use the source</a>, Luke!</q>
+    <div id="subscription model" class="big step" data-x="12000" data-y="-300" data-scale="6">
+        <p>Vendors will pay a <strong>monthly fee</strong> to host their restaurant</p>
+        <b>AND</b>
+        <p>a <strong>transaction fee</strong> for every item they sell.</p>
+    </div>
+    
+    <div id="Users" class="step" data-x="6300" data-y="2000" data-rotate="20" data-scale="4">
+        <p>How will Jill find <span class="logo">Restaurantify<span class="me">.me</span></span>?</p>
     </div>
 
-    <div id="one-more-thing" class="step" data-x="6000" data-y="4000" data-scale="2">
-        <p>one more thing...</p>
+    <div id="pauline-tell" class="step" data-x="6000" data-y="4000" data-scale="5">
+        <p>We're going to get <strong>Pauline</strong> to tell her!</p>
     </div>
 
     <!--
@@ -254,11 +280,84 @@
         as `data-rotate` (these two are basically aliases).
         
     -->
-    <div id="its-in-3d" class="step" data-x="6200" data-y="4300" data-z="-100" data-rotate-x="-40" data-rotate-y="10" data-scale="2">
-        <p><span class="have">have</span> <span class="you">you</span> <span class="noticed">noticed</span> <span class="its">it's</span> <span class="in">in</span> <b>3D<sup>*</sup></b>?</p>
-        <span class="footnote">* beat that, prezi ;)</span>
+    <div id="pauline-jill-win-win" class="step" data-x="6200" data-y="5000" data-z="-100" data-rotate-x="-40" data-rotate-y="10" data-scale="2">
+        <p>We will give vendors such as Pauline the resources and knowledge they need to successfully market their online store to ideal customers.</p>
     </div>
-
+    
+    <div id="win win 2" class="tiny step" data-x="7000" data-y="4000" data-z="-4000" data-rotate="300" data-scale="1">
+        <p>That's another <b>win-win</b>!</p>
+    </div>
+    
+    <div id="vendor-marketin-win-win" class="step" data-x="8200" data-y="5000" data-z="-100" data-rotate-x="-40" data-rotate-y="10" data-scale="2">
+        <p>Since individual vendors are responsible for the marketing of their own store, our vendors help build the traffic to our website.</p>
+        <br/>
+        <p>Pauline is happy because we give her the tools and marketing resources to promote her restaurant.</p>
+    </div>
+    
+<!--    
+    <div id="Find-Vendors" class="step" data-x="6300" data-y="3000" data-rotate="20" data-scale="4">
+        <p>How will Pauline find restaurantify.me?</p>
+    </div>
+    -->
+    
+    <div id="competition-1" class="step" data-x="10000" data-y="5000">
+        <p>Who else is trying to solve the same problem as us?</p>
+    </div>
+    
+    <div id="competition-2" class="step" data-x="12000" data-y="5000">
+        <p>The idea originally started in France with <strong>super-marmite.com</strong></p>
+    </div>
+    
+    <div id="competition-3" class="step" data-x="14000" data-y="5000">
+        <p>Their success in France recently encouraged a few websites to try the same idea in the United States, the biggest being Gobble.com</p>
+    </div>
+    
+    <div id="competition-4" class="big step" data-x="16000" data-y="5000">
+        <p>Currently, there is no clear market leader. The home-based online restaurant world is <b>wide</b> open...</p>
+    </div>
+    
+    <div id="competition-5" class="step big" data-x="18000" data-y="5000" data-scale="2">
+        <p>...but we want to <b>change</b> that!</p>
+    </div>
+    
+    <div id="why-us" class="step" data-x="18500" data-y="6000" data-rotate-x="90">
+        <p>What <strong>distinguishes</strong> us?</p>
+    </div>
+    
+    <div id="underlying-magic-1" class="step" data-x="20000" data-y="6000" data-rotate="5">
+        <p>Ruby on Rails allows us to be <strong>agile</strong></p>
+    </div>
+    
+    <div id="underlying-magic-2" class="big step" data-x="20000" data-y="6500" data-rotate="5">
+        <p>Amazon's Cloud allows us to be <b>scalable</b></p>
+    </div>
+    
+    <div id="underlying-magic-3" class="step" data-x="20000" data-y="7000" data-rotate="5">
+        <p>and <strong>machine learning</strong> allows us to be constantly improving our user experience</p>
+    </div>
+    
+    <div id="team-1" class="big step" data-x="20000" data-y="10000" data-z="1000" data-rotate="150">
+        <p>Our product is cool, but our biggest asset is our</p>
+        <b>team</b>
+    </div>
+    
+    <div id="team-2" class="team step" data-x="20000" data-y="11000" data-z="3000" data-rotate="50" data-scale="6">
+        <h1>Mujtaba Badat</h1>
+        <br/>
+        <q><strong>Sales and marketing</strong> whiz by day, <strong>programmer</strong> by night</q>
+    </div>
+    
+    <div id="team-3" class="team step" data-x="24000" data-y="11000" data-z="4000" data-rotate="50" data-scale="3">
+        <h1>Ricky Gu</h1>
+        <br/>
+        <q><strong>Product visionary</strong> - An engineer who can <strong>design</strong> things beautifully and hack things <strong>rapidly</strong></q>
+    </div>
+    
+    <div id="team-4" class="team step" data-x="26000" data-y="11000" data-z="5000" data-rotate="50" data-scale="1">
+        <h1>Pouyan Taghipour</h1>
+        <br/>
+        <q><strong>Machine learning guru</strong> holding two masters; <strong>algorithms</strong> are his friend</q>
+    </div>
     <!--
         
         So to make a summary of all the possible attributes used to position presentation steps, we have:
@@ -271,9 +370,13 @@
         * `data-scale` -- defines the scale of step element; default value is 1
         
     -->
-    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
-    </div>
 
+    <div id="end" class="big step" data-x="-5000" data-y="5000" data-rotate-x="0" data-scale="5">
+        <h1><span class="logo">Restaurantify<span class="me">.me</span></span></h1>
+        <br/>
+        <p>Beta launch on March 18th 2012</p>
+    </div>
+    
 </div>
 
 <!--
@@ -282,20 +385,19 @@
     
     But it can show you how to use impress.js features in creative way.
     
-    When the presentation step is shown (selected) its element gets the class of "active" and the body element
-    gets the class based on active step id `impress-on-ID` (where ID is the step's id)... It may not be
-    so clear because of all these "ids" in previous sentence, so for example when the first step (the one with
-    the id of `bored`) is active, body element gets a class of `impress-on-bored`.
+    When the presentation step is shown (selected) it's element get's the class of "active" and `#impress` root
+    element get's the class based on active step id `step-ID` (where ID is the step id)... It probably is not
+    so clear because of all these IDs in here, so for example when the first step (the one with id of `bored`)
+    is active, `#impress` element get a class of `step-bored`.
     
-    This class is used by this hint below. Check CSS file to see how it's shown with delayed CSS animation when
-    the first step of presentation is visible for a couple of seconds.
+    This class is used by this hint below. Check CSS file to see how it's shown with delayed CSS animation.
     
     ...
     
     And when it comes to this piece of JavaScript below ... kids, don't do this at home ;)
-    It's just a quick and dirty workaround to get different hint text for touch devices.
+    It's just a quick and dirty workaround to get different content for touch devices.
     In a real world it should be at least placed in separate JS file ... and the touch content should be
-    probably just hidden somewhere in HTML - not hard-coded in the script.
+    probably just hidden somewhere in HTML, not hard-coded in the script.
     
     Just sayin' ;)
     
@@ -339,7 +441,7 @@ if ("ontouchstart" in document.documentElement) {
     
         `api.next()` - moves to next step of the presentation,
         `api.prev()` - moves to previous step of the presentation
-        `api.stepTo( stepElement ) - moves the presentation to given step element (the DOM element of the step).
+        `api.goto( stepElement ) - moves the presentation to given step element (the DOM element of the step).
     
     You can also simply call `impress()` again to get the API, so `impress().next()` is also allowed.
     Don't worry, it wont initialize the presentation again.
